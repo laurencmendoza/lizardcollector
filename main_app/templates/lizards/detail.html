@@ -10,6 +10,10 @@
         <p>Description: {{ lizard.description|linebreaks }}</p>
         <p>Age: {{ lizard.age }}</p>
     </div>
+    <div class="card-action">
+        <a href="{% url 'lizards_update' lizard.id %}">Edit</a>
+        <a href="{% url 'lizards_delete' lizard.id %}">Delete</a>
+    </div>
 </div>
 
 {% endblock %}

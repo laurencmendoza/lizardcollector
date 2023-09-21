@@ -8,5 +8,5 @@ urlpatterns = [
     path('lizards/<int:lizard_id>/', views.lizards_detail, name='detail'),
     path('lizards/create/', views.LizardCreate.as_view(), name='lizards_create'),
     path('lizards/<int:pk>/update/', views.LizardUpdate.as_view(), name="lizards_update"),
-    path('lizards/<int:pk>/update/', views.LizardUpdate.as_view(), name="lizards_update"),
+    path('lizards/<int:pk>/delete/', views.LizardDelete.as_view(), name="lizards_delete"),
 ]

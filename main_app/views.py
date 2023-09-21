@@ -24,3 +24,11 @@ def lizards_detail(request, lizard_id):
 class LizardCreate(CreateView):
     model = Lizard
     fields = '__all__'
+
+class LizardUpdate(UpdateView):
+    model = Lizard
+    fields = '__all__'
+
+class LizardDelete(DeleteView):
+    model = Lizard
+    success_url = '/lizards'
