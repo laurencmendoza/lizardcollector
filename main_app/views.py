@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Lizard
+from .forms import FeedingForm
 
 # Create your views here.
 def home(request):
@@ -17,8 +18,10 @@ def lizards_index(request):
 
 def lizards_detail(request, lizard_id):
     lizard = Lizard.objects.get(id=lizard_id)
+    feeding_form = FeedingForm()
     return render(request, 'lizards/detail.html', {
-        'lizard': lizard
+        'lizard': lizard, 
+        'feeding_form': feeding_form
     })
 
 class LizardCreate(CreateView):
