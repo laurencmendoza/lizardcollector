@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Lizard
 from .forms import FeedingForm
@@ -35,3 +35,11 @@ class LizardUpdate(UpdateView):
 class LizardDelete(DeleteView):
     model = Lizard
     success_url = '/lizards'
+
+def add_feeding(request, lizard_id):
+    form = FeedingForm(request.POST)
+    if form.is_valid():
+        new_feeding = form.save(commit=False)
+        new_feeding.lizard_id = lizard_id
+        new_feeding.save()
+    return redirect('detail', lizard_id=lizard_id)
