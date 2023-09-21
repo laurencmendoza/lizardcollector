@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Lizard
 
 # Create your views here.
@@ -19,3 +20,7 @@ def lizards_detail(request, lizard_id):
     return render(request, 'lizards/detail.html', {
         'lizard': lizard
     })
+
+class LizardCreate(CreateView):
+    model = Lizard
+    fields = '__all__'
