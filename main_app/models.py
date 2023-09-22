@@ -10,11 +10,22 @@ MEALS = (
     ('D', 'Dinner')
 )
 
+class Food(models.Model):
+    name = models.CharField(max_length=100)
+    found_at = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('foods_detail', kwargs={'pk': self.id})
+    
 class Lizard(models.Model):
     name = models.CharField(max_length=100)
     species = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     age = models.IntegerField()
+    favorite_foods = models.ManyToManyField(Food)
 
     def __str__(self):
         return f'{self.name} ({self.id})'
@@ -40,12 +51,3 @@ class Feeding(models.Model):
     class Meta: 
         ordering = ['-date']
 
-class Food(models.Model):
-    name = models.CharField(max_length=100)
-    found_at = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-    
-    def get_absolute_url(self):
-        return reverse('foods_detail', kwargs={'pk': self.id})

@@ -20,9 +20,12 @@ def lizards_index(request):
 def lizards_detail(request, lizard_id):
     lizard = Lizard.objects.get(id=lizard_id)
     feeding_form = FeedingForm()
+    id_list = lizard.favorite_foods.all().values_list('id')
+    foods_lizard_doesnt_have = Food.objects.exclude(id__in=id_list)
     return render(request, 'lizards/detail.html', {
         'lizard': lizard, 
-        'feeding_form': feeding_form
+        'feeding_form': feeding_form, 
+        'foods': foods_lizard_doesnt_have
     })
 
 class LizardCreate(CreateView):
@@ -62,3 +65,7 @@ class FoodUpdate(UpdateView):
 class FoodDelete(DeleteView):
     model = Food
     success_url = '/foods'
+
+def assoc_food(request, lizard_id, food_id):
+    Lizard.objects.get(id=lizard_id).favorite_foods.add(food_id)
+    return redirect('detail', lizard_id=lizard_id)
