@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Lizard
+from django.views.generic import ListView, DetailView
+from .models import Lizard, Food
 from .forms import FeedingForm
 
 # Create your views here.
@@ -43,3 +44,21 @@ def add_feeding(request, lizard_id):
         new_feeding.lizard_id = lizard_id
         new_feeding.save()
     return redirect('detail', lizard_id=lizard_id)
+
+class FoodList(ListView):
+    model = Food
+
+class FoodDetail(DetailView):
+    model = Food
+
+class FoodCreate(CreateView):
+    model = Food
+    fields = '__all__'
+
+class FoodUpdate(UpdateView):
+    model = Food
+    fields = ['name', 'found_at']
+
+class FoodDelete(DeleteView):
+    model = Food
+    success_url = '/foods'

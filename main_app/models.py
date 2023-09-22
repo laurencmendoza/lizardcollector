@@ -39,3 +39,13 @@ class Feeding(models.Model):
     
     class Meta: 
         ordering = ['-date']
+
+class Food(models.Model):
+    name = models.CharField(max_length=100)
+    found_at = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('food_detail', kwargs={'pk': self.id})
