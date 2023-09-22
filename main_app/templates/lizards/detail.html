@@ -56,6 +56,10 @@
         <div class="card">
             <div class="card-content">
             <span class="card-title">{{ food.name }} from {{food.found_at}}</span>
+            <form action="{% url 'unassoc_food' lizard.id food.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn">Remove</button>
+            </form>
             </div>
         </div>
         {% endfor %}

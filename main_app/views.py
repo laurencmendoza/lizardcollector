@@ -69,3 +69,7 @@ class FoodDelete(DeleteView):
 def assoc_food(request, lizard_id, food_id):
     Lizard.objects.get(id=lizard_id).favorite_foods.add(food_id)
     return redirect('detail', lizard_id=lizard_id)
+
+def unassoc_food(request, lizard_id, food_id):
+    Lizard.objects.get(id=lizard_id).favorite_foods.remove(food_id)
+    return redirect('detail', lizard_id=lizard_id)
